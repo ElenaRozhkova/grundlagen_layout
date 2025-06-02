@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import FormAbschnitt from './FormAbschnitt';
+import { LanguageContext } from '../context/LanguageContext';
+import { translations } from '../translations';
 
 export default function RegistrierungsFormular() {
     const [formular, setFormular] = useState({
@@ -12,6 +14,9 @@ export default function RegistrierungsFormular() {
             stadt: ''
         }
     });
+
+    const { language } = useContext(LanguageContext);
+    const t = translations[language];
 
     const aktualisiereFormular = (kategorie, feld, wert) => {
         setFormular(prev => ({
@@ -30,22 +35,27 @@ export default function RegistrierungsFormular() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Registrierung</h2>
+            <h2>{t.registration}</h2>
+
             <FormAbschnitt
-                titel="Persönliche Daten"
+                titel={t.personalData}
                 daten={formular.persönlich}
+                feldNamen={{ name: t.name, email: t.email }}
                 onChange={(feld, wert) =>
                     aktualisiereFormular('persönlich', feld, wert)
                 }
             />
+
             <FormAbschnitt
-                titel="Adresse"
+                titel={t.address}
                 daten={formular.adresse}
+                feldNamen={{ straße: t.street, stadt: t.city }}
                 onChange={(feld, wert) =>
                     aktualisiereFormular('adresse', feld, wert)
                 }
             />
-            <button type="submit">Absenden</button>
+
+            <button type="submit">{t.submit}</button>
         </form>
     );
 }

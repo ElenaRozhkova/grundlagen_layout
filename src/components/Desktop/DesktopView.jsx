@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import Header from './Header/Header';
 
-export default function DesktopView() {
+
+export default function DesktopView({ children }) {  // children als Prop
     const { theme } = useContext(ThemeContext);
 
     const styles = {
@@ -17,7 +19,10 @@ export default function DesktopView() {
 
     return (
         <div style={{ padding: '20px', ...styles[theme] }}>
-            Desktop View (Theme: {theme})
+            <div>Desktop View (Theme: {theme})</div>
+            <hr />
+            <Header />
+            <div>{children}</div>
         </div>
     );
 }
