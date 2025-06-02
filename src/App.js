@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import ResponsiveComponent from './components/ResponsiveComponent';
+import FlexContainer from './layout/FlexContainer'
+import RegistrierungsFormular from './components/RegistrierungsFormular'
+import { ThemeProvider } from './context/ThemeContext';
+import ThemedButton from './components/ThemedButton'
+import './App.css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeProvider>
+        <ThemedButton />
+        <h1>Responsive React App</h1>
+        <FlexContainer>
+          <div>Element 1</div>
+          <div>Element 2</div>
+        </FlexContainer>
+        <ResponsiveComponent />
+
+        <RegistrierungsFormular />
+      </ThemeProvider>
+    </>
+
   );
 }
 
